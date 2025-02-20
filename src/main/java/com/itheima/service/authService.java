@@ -59,4 +59,32 @@ public class authService {
             return ResponseEntity.ok(response);  // 返回 JSON 格式的响应
         }
     }
+
+    public String updateNameService(String username, String new_username) {
+        // 修改用户登记信息
+        int res = userMapper.updateUsername(username, new_username);
+        if (res == 0) {
+            // 用户不存在
+            return "Invalid username";
+        }
+        return "Update username successfully";
+    }
+
+    public String updatePasswordService(String username, String new_password) {
+        int res = userMapper.updatePassword(username, new_password);
+        if (res == 0) {
+            return "Invalid username";
+        }
+        return "Update password successfully";
+    }
+
+    public String deleteUserService(String username) {
+        // 注销用户记录
+        int res = userMapper.deleteUser(username);
+        if (res == 0) {
+            // 用户不存在
+            return "Invalid username";
+        }
+        return "delete successfully";  // 返回响应
+    }    
 }

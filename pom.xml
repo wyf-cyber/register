@@ -10,10 +10,10 @@
     </parent>
     <groupId>com.itheima</groupId>  <!-- 组织名称 -->
     
-    <artifactId>register</artifactId>  <!-- 项目名称 -->
+    <artifactId>online-registration-system</artifactId>  <!-- 项目名称：线上挂号系统 -->
     <version>0.0.1-SNAPSHOT</version>
-    <name>register</name>
-    <description>register</description>
+    <name>online-registration-system</name>
+    <description>online-registration-system</description>
     <properties>
         <java.version>17</java.version>
     </properties>
