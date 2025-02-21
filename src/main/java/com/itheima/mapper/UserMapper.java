@@ -29,4 +29,12 @@ public interface UserMapper {
     // 删除用户（可选）
     @Delete("DELETE FROM users WHERE username = #{username}")
     int deleteUser(String username);
+
+    // 更新用户绑定邮箱
+    @Update("Update users SET email = #{new_email} WHERE username = #{username}")
+    int updateEmail(String username, String new_email);
+    
+    // 查询用户绑定邮箱
+    @Select("SELECT email FROM users WHERE username = #{username}")
+    String getEmail(String username);
 }
