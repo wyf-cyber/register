@@ -1,7 +1,7 @@
 package com.itheima.service;
 
 import com.itheima.config.WebAPIConfig;
-import com.itheima.pojo.verifyCodeAPI;
+import com.itheima.pojo.VerifyCodeAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -49,7 +49,7 @@ public class webToolsService {
                     String verifyCode = (String) data.get("verifyCode");
                     String verifyCodeImgUrl = (String) data.get("verifyCodeImgUrl");
 
-                    verifyCodeAPI captchaResponse = new verifyCodeAPI();
+                    VerifyCodeAPI captchaResponse = new VerifyCodeAPI();
                     captchaResponse.setVerifyCode(verifyCode);
                     captchaResponse.setVerifyCodeImgUrl(verifyCodeImgUrl);
 
