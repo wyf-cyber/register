@@ -26,7 +26,7 @@ public interface UserMapper {
     @Update("Update users SET username = #{new_username} WHERE username = #{username}")
     int updateUsername(String username, String new_username);
 
-    // 删除用户（可选）
+    // 删除用户
     @Delete("DELETE FROM users WHERE username = #{username}")
     int deleteUser(String username);
 
