@@ -1,6 +1,6 @@
 package com.itheima.service;
 
-import com.itheima.config.WebAPIConfig;
+import com.itheima.config.WebApiConfig;
 import com.itheima.pojo.VerifyCodeAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -17,7 +17,7 @@ import java.util.Map;
 public class webToolsService {
 
     @Autowired
-    private WebAPIConfig webAPIConfig;
+    private WebApiConfig webApiConfig;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -30,8 +30,8 @@ public class webToolsService {
             URI uri = UriComponentsBuilder.fromHttpUrl(captchaUrl)
                     .queryParam("len", 5)   // 验证码位数
                     .queryParam("type", 0)  // 返回类型，0-生成图片的地址链接 1-生成验证码图片的base64字符串
-                    .queryParam("app_id", webAPIConfig.getAppId())
-                    .queryParam("app_secret", webAPIConfig.getAppSecret())
+                    .queryParam("app_id", webApiConfig.getAppId())
+                    .queryParam("app_secret", webApiConfig.getAppSecret())
                     .build()
                     .toUri();
 
