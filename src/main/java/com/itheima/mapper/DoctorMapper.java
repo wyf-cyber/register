@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface DoctorMapper {
@@ -46,4 +47,20 @@ public interface DoctorMapper {
     // 修改医生的状态
     //@Update("UPDATE doctors SET state = #{newState} WHERE department = #{department} AND doctor = #{doctor}")
     //int setState(String department, String doctor, int newState);
+
+    // 更新医生信息
+    @Update("UPDATE doctors SET department = #{newDepartment}, doctor = #{newDoctor}, " +
+            "detail = #{newDetail} WHERE department = #{department} AND doctor = #{doctor} " +
+            "AND work_date = #{day}")
+    void updateDoctor(String department, String doctor, String newDepartment, 
+                     String newDoctor, String newDetail, String day);
+
+    // 获取指定科室的所有医生
+    @Select("SELECT DISTINCT doctor, detail FROM doctors WHERE department = #{department}")
+    List<Map<String, Object>> getDoctorsByDepartment(String department);
+
+    // 获取指定日期的医生排班情况
+    @Select("SELECT department, doctor, detail, state, work_date FROM doctors " +
+            "WHERE work_date = #{day} ORDER BY department, doctor")
+    List<Map<String, Object>> getDoctorSchedule(String day);
 }

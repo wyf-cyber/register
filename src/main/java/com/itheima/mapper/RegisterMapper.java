@@ -4,7 +4,7 @@ import com.itheima.pojo.Appointment;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
-
+import java.util.Map;
 @Mapper
 public interface RegisterMapper {
 
@@ -35,4 +35,27 @@ public interface RegisterMapper {
     // 更新指定用户的预约
     @Update("UPDATE appointment SET username = #{new_username} WHERE username = #{username}")
     void updateUsername(String username, String new_username);
+
+    // 统计指定条件下的预约人数
+    @Select("SELECT COUNT(*) FROM appointment WHERE department = #{department} " +
+            "AND doctor = #{doctor} AND day = #{day} " +
+            "AND time BETWEEN #{begin_time} AND #{end_time}")
+    int countAppointments(String department, String doctor, String day, 
+                         int begin_time, int end_time);
+
+    // 统计指定日期的系统总预约数
+    @Select("SELECT COUNT(*) FROM appointment WHERE day = #{day}")
+    int countSystemAppointments(String day);
+
+    // 获取各科室在指定时间段内的预约统计
+    @Select("SELECT department, COUNT(*) as count FROM appointment " +
+            "WHERE day BETWEEN #{startDate} AND #{endDate} " +
+            "GROUP BY department ORDER BY count DESC")
+    List<Map<String, Object>> getDepartmentStats(String startDate, String endDate);
+
+    // 获取指定时间段内的每日预约趋势
+    @Select("SELECT day, COUNT(*) as count FROM appointment " +
+            "WHERE day BETWEEN #{startDate} AND #{endDate} " +
+            "GROUP BY day ORDER BY day")
+    List<Map<String, Object>> getAppointmentTrend(String startDate, String endDate);
 }

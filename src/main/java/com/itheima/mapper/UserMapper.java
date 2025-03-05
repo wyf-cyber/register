@@ -37,4 +37,8 @@ public interface UserMapper {
     // 查询用户绑定邮箱
     @Select("SELECT email FROM users WHERE username = #{username}")
     String getEmail(String username);
+
+    // 当前系统的用户数量
+    @Select("SELECT COUNT(*) FROM users")
+    int countSystemUsers();
 }
