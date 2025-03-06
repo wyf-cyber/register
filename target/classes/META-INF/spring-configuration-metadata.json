@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "webapi",
+      "type": "com.itheima.config.WebApiConfig",
+      "sourceType": "com.itheima.config.WebApiConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "webapi.app-id",
+      "type": "java.lang.String",
+      "sourceType": "com.itheima.config.WebApiConfig"
+    },
+    {
+      "name": "webapi.app-secret",
+      "type": "java.lang.String",
+      "sourceType": "com.itheima.config.WebApiConfig"
+    }
+  ],
+  "hints": []
+}

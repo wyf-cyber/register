@@ -8,7 +8,7 @@ spring:
     # 发送者邮箱
     username: 17326280236@163.com
     # 申请到的授权码
-    password:
+    password: ZXkgb53mu9wpJUfj
     # 配置 SMTP 服务器地址
     host: smtp.163.com
     # 端口号465或587

@@ -15,7 +15,7 @@ public interface UserMapper {
     UserInfo findByUsername(String username);
 
     // 插入新用户
-    @Insert("INSERT INTO users (username, password) VALUES (#{username}, #{password})")
+    @Insert("INSERT INTO users (username, password, email) VALUES (#{username}, #{password}, #{email})")
     int insertUser(UserInfo userInfo);
 
     // 更新用户密码

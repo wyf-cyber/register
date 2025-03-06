@@ -20,7 +20,7 @@ public class authService {
     @Autowired
     private EmailMsg emailMsg;
 
-    public ResponseEntity<?> registerService(String username, String password) {
+    public ResponseEntity<?> registerService(String username, String password, String email) {
         UserInfo user = userMapper.findByUsername(username); // Fetch data from database
         ApiMessage response = new ApiMessage();
         if (user == null) {
@@ -28,6 +28,7 @@ public class authService {
             UserInfo newUser = new UserInfo();
             newUser.setUsername(username);
             newUser.setPassword(password);
+            newUser.setEmail(email);
             int rowsAffected = userMapper.insertUser(newUser);
             if(rowsAffected > 0) {
                 // 注册成功

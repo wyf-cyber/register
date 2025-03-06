@@ -15,8 +15,8 @@ public class authController {
 
     // 注册逻辑
     @GetMapping("/register")
-    public ResponseEntity<?> register(@RequestParam String username, @RequestParam String password) {
-        return authService.registerService(username, password);
+    public ResponseEntity<?> register(@RequestParam String username, @RequestParam String password, @RequestParam String email) {
+        return authService.registerService(username, password, email);
     }
 
     // 登录逻辑
