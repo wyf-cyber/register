@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class registerService {
+public class RegisterService {
 
     @Autowired
     private RegisterMapper registerMapper;

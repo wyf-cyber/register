@@ -28,7 +28,7 @@ public class EmailMsg {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
 
             //设置一个html邮件信息
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);  // The 'true' means the email content will be in HTML format.
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);  // 表示邮件内容为HTML格式
 
             helper.setText(
                     "<html>" +
@@ -45,7 +45,7 @@ public class EmailMsg {
                             "</div>" +
                             "</body>" +
                             "</html>",
-                    true); // The 'true' means the email content will be in HTML format.
+                    true); // 表示邮件内容为HTML格式
             //设置邮件主题名
             helper.setSubject("XXX线上挂号服务平台登录验证");
 
@@ -56,7 +56,8 @@ public class EmailMsg {
             helper.setFrom(sender);
 
             mailSender.send(mimeMessage);
-            // 只有邮件发送成功后才存储验证码
+            // 只有邮件发送成功后才存储验证码到 Redis
+            // 设置验证码的过期时间为10分钟
             redisTemplate.opsForValue().set(username, code, Duration.ofMinutes(10));
             return true;
         } catch (MessagingException e) {
@@ -68,22 +69,22 @@ public class EmailMsg {
 
     // 检查输入是否正确
     public boolean verifyCode(String username, String inputCode) {
-        // Retrieve the stored code from Redis
+        // 从 Redis 中获取存储的验证码
         String storedCode = redisTemplate.opsForValue().get(username);
 
-        // If no code exists in Redis or it has expired
+        // 如果 Redis 中不存在验证码或已过期
         if (storedCode == null) {
-            return false; // Code not found or expired
+            return false; // 验证码不存在或已过期
         }
 
-        // Compare the stored code with the input code
+        // 比较存储的验证码与输入的验证码
         if (storedCode.equals(inputCode)) {
-            // Code matches, delete the code from Redis after successful verification
+            // 验证码匹配，删除验证码
             redisTemplate.delete(username);
-            return true; // Code is correct
+            return true; // 验证码正确
         }
 
-        // Code doesn't match
+        // 验证码不匹配
         return false;
     }
 }

@@ -28,7 +28,7 @@ spring:
     redis:
       host: localhost
       port: 6379
-      timeout: 5000  # 可选项，连接超时时间，默认2000ms
+      timeout: 5000  # 可选项，连接超时时间，默认5000ms
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

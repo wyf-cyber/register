@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin // Support cross-origin requests
-public class authController {
+public class AuthController {
 
     @Autowired
-    private com.itheima.service.authService authService;
+    private com.itheima.service.AuthService authService;
 
     // 注册逻辑
     @GetMapping("/register")

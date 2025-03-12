@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class adminService {
+public class AdminService {
     @Autowired
     private DoctorMapper doctorMapper;
     @Autowired
