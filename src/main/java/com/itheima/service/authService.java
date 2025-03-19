@@ -1,15 +1,19 @@
 package com.itheima.service;
 
 import com.itheima.mapper.UserMapper;
+import com.itheima.mapper.RegisterMapper;
 import com.itheima.pojo.ApiMessage;
 import com.itheima.pojo.EmailMsg;
 import com.itheima.pojo.UserInfo;
+import com.itheima.pojo.Appointment;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Random;
+import java.util.List;
 
 @Service
 public class AuthService {
@@ -17,6 +21,9 @@ public class AuthService {
     @Autowired
     private UserMapper userMapper;
     
+    @Autowired
+    private RegisterMapper registerMapper;
+
     @Autowired
     private EmailMsg emailMsg;
 
@@ -135,5 +142,30 @@ public class AuthService {
 
     public boolean checkEmailCode(String username, String code) {
         return emailMsg.verifyCode(username, code);
+    }
+
+    // 获取用户信息，目前只有用户的绑定邮箱
+    public String getUserInfoService(String username) {
+        return userMapper.getEmail(username);
+    }
+
+    // 获取用户过往预约记录
+    // 包含科室、医生、日期、时间、预约状态
+    public List<Appointment> getUserAppointmentHistoryService(String username) {
+        // 获取用户预约列表
+        List<Appointment> history = registerMapper.getUserAppointmentHistory(username);
+        // 遍历列表，利用时间检查是否完成
+        LocalDate current = LocalDate.now();
+        for(Appointment appointment : history) {
+            // 根据day判断是否属于已完成的预约
+            if (current.isBefore(LocalDate.parse(appointment.getDay()))) {
+                // 如果预约日期大于当前日期，则设置为未完成
+                appointment.setTime(0);
+            } else {
+                // 如果预约日期小于等于当前日期，则设置为已完成
+                appointment.setTime(1);
+            }
+        }
+        return history;
     }
 }

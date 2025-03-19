@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.itheima.pojo.Appointment;
+import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
@@ -61,5 +63,17 @@ public class AuthController {
     public Boolean checkCode(@RequestParam String username, @RequestParam String code) {
         // 返回 true 或 false
         return authService.checkEmailCode(username,code);
+    }
+
+    // 获取用户信息
+    @GetMapping("/getUserInfo")
+    public String getUserInfo(@RequestParam String username) {
+        return authService.getUserInfoService(username);
+    }
+
+    // 获取用户过往预约记录
+    @GetMapping("/getUserAppointmentHistory")
+    public List<Appointment> getUserAppointmentHistory(@RequestParam String username) {
+        return authService.getUserAppointmentHistoryService(username);
     }
 }

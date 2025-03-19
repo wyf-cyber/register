@@ -36,6 +36,10 @@ public interface RegisterMapper {
     @Update("UPDATE appointment SET username = #{new_username} WHERE username = #{username}")
     void updateUsername(String username, String new_username);
 
+    // 获取用户过往所有的预约记录
+    @Select("SELECT * FROM appointment WHERE username = #{username}")
+    List<Appointment> getUserAppointmentHistory(String username);
+
     // 统计指定条件下的预约人数
     @Select("SELECT COUNT(*) FROM appointment WHERE department = #{department} " +
             "AND doctor = #{doctor} AND day = #{day} " +
