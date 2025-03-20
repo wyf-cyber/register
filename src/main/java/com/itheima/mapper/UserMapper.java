@@ -11,11 +11,11 @@ import com.itheima.pojo.UserInfo;
 public interface UserMapper {
 
     // 根据用户名查询用户
-    @Select("SELECT id, username, password FROM users WHERE username = #{username}")
+    @Select("SELECT id, username, password, email, role FROM users WHERE username = #{username}")
     UserInfo findByUsername(String username);
 
     // 插入新用户
-    @Insert("INSERT INTO users (username, password, email) VALUES (#{username}, #{password}, #{email})")
+    @Insert("INSERT INTO users (username, password, email, role) VALUES (#{userInfo.getUsername()}, #{userInfo.getPassword()}, #{userInfo.getEmail()}, #{userInfo.getRole()})")
     int insertUser(UserInfo userInfo);
 
     // 更新用户密码

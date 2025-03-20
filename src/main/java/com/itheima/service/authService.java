@@ -27,6 +27,8 @@ public class AuthService {
     @Autowired
     private EmailMsg emailMsg;
 
+    // 注册逻辑，注册成功后，将用户信息插入到数据库中，并返回注册成功信息
+    // 普通用户需要注册，管理员用户直接插入到数据库中
     public ResponseEntity<?> registerService(String username, String password, String email) {
         UserInfo user = userMapper.findByUsername(username); // Fetch data from database
         ApiMessage response = new ApiMessage();
@@ -36,6 +38,7 @@ public class AuthService {
             newUser.setUsername(username);
             newUser.setPassword(password);
             newUser.setEmail(email);
+            newUser.setRole("user");      // 使用注册的只有普通用户
             int rowsAffected = userMapper.insertUser(newUser);
             if(rowsAffected > 0) {
                 // 注册成功
@@ -55,6 +58,9 @@ public class AuthService {
         }
     }
 
+    // 登录逻辑，登录成功后，返回登录成功信息
+    // 如果是管理员用户，则返回管理员用户身份确认
+    // 如果是普通用户，则返回普通用户身份确认
     public ResponseEntity<?> loginService(String username, String password) {
         UserInfo user = userMapper.findByUsername(username); // Fetch data from database
         ApiMessage response = new ApiMessage();
@@ -71,7 +77,7 @@ public class AuthService {
         } else {
             // 成功登录
             response.setSuccess(true);
-            response.setMessage("Login successfully");
+            response.setMessage(user.getRole()); // 返回角色
             return ResponseEntity.ok(response);  // 返回 JSON 格式的响应
         }
     }
@@ -121,6 +127,7 @@ public class AuthService {
         return String.valueOf(code);  // 返回字符串形式的验证码
     }
 
+    // 发送验证码到用户邮箱
     public String sendVerificationEmail(String username) {
         String code = generateVerificationCode();
         String toEmail = userMapper.getEmail(username);
@@ -140,8 +147,31 @@ public class AuthService {
         return "Email sent successfully";
     }
 
-    public boolean checkEmailCode(String username, String code) {
-        return emailMsg.verifyCode(username, code);
+    // 检查验证码是否正确
+    public ResponseEntity<?> checkEmailCode(String username, String code) {
+        if(emailMsg.verifyCode(username, code)) {
+            // 验证码正确，查找用户是否是管理员
+            UserInfo user = userMapper.findByUsername(username);
+            if(user.getRole().equals("admin")) {
+                // 构建消息
+                ApiMessage response = new ApiMessage();
+                response.setSuccess(true);
+                response.setMessage("admin");
+                return ResponseEntity.ok(response);  // 返回 JSON 格式的响应
+            } else {
+                // 构建消息
+                ApiMessage response = new ApiMessage();
+                response.setSuccess(true);
+                response.setMessage("user");
+                return ResponseEntity.ok(response);  // 返回 JSON 格式的响应
+            }
+        } else {
+            // 验证码不正确
+            ApiMessage response = new ApiMessage();
+            response.setSuccess(false);
+            response.setMessage("Invalid code");
+            return ResponseEntity.ok(response);  // 返回 JSON 格式的响应
+        }
     }
 
     // 获取用户信息，目前只有用户的绑定邮箱

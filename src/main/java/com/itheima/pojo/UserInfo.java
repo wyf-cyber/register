@@ -13,4 +13,5 @@ public class UserInfo {
     private String username;
     private String password;
     private String email;
+    private String role;   // 角色，不能为空(admin or user)
 }

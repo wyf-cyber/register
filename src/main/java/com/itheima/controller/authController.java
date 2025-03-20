@@ -60,9 +60,9 @@ public class AuthController {
 
     // 检验输入的验证数字
     @GetMapping("/checkCode")
-    public Boolean checkCode(@RequestParam String username, @RequestParam String code) {
-        // 返回 true 或 false
-        return authService.checkEmailCode(username,code);
+    public ResponseEntity<?> checkCode(@RequestParam String username, @RequestParam String code) {
+        // 返回 JSON 格式的响应
+        return authService.checkEmailCode(username, code);
     }
 
     // 获取用户信息
