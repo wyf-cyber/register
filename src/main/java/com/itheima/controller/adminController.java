@@ -13,6 +13,12 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    // 获取普通用户的数量
+    @GetMapping("/getUserCount")
+    public ResponseEntity<?> getUserCount() {
+        return adminService.getUserCountService();
+    }
+
     // 添加一个医生的信息
     @GetMapping("/addDoctor")
     public ResponseEntity<?> addDoctor(@RequestParam String department, @RequestParam String doctor, @RequestParam String detail, @RequestParam String day) {
@@ -59,5 +65,11 @@ public class AdminController {
     @GetMapping("/getAppointmentTrend")
     public ResponseEntity<?> getAppointmentTrend(@RequestParam String startDate, @RequestParam String endDate) {
         return adminService.getAppointmentTrendService(startDate, endDate);
+    }
+
+    // 获取未来7天的预约数量
+    @GetMapping("/countSystemAppointments")
+    public ResponseEntity<?> countSystemAppointments(@RequestParam String day) {
+        return adminService.countSystemAppointmentsService(day);
     }
 }

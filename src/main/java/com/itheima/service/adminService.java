@@ -23,6 +23,14 @@ public class AdminService {
     @Autowired
     private UserMapper userMapper;
 
+    // 获取普通用户的数量
+    public ResponseEntity<?> getUserCountService() {
+        int userCount = userMapper.getUserCount();
+        int adminCount = userMapper.getAdminCount();
+        int res = userCount-adminCount;
+        return ResponseEntity.ok(res);
+    }
+
     // 添加一个医生的信息
     public ResponseEntity<?> addDoctorService(String department, String doctor, String detail, String day) {
         doctorMapper.addDoctor(department, doctor, detail, day);
@@ -47,12 +55,6 @@ public class AdminService {
         int count = registerMapper.countAppointments(department, doctor, day, begin_time, end_time);
         return ResponseEntity.ok(count);
     }
-
-    // 当前系统的用户数量
-    public ResponseEntity<?> countSystemUsersService() {
-        int count = userMapper.countSystemUsers();
-        return ResponseEntity.ok(count);
-    }   
 
     // 当前系统的预约数量，返回一个整型列表，列表中包含接下来7天的预约数量
     public ResponseEntity<?> countSystemAppointmentsService(String day) {

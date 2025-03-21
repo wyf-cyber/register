@@ -38,7 +38,11 @@ public interface UserMapper {
     @Select("SELECT email FROM users WHERE username = #{username}")
     String getEmail(String username);
 
-    // 当前系统的用户数量
+    // 获取所有用户数量
     @Select("SELECT COUNT(*) FROM users")
-    int countSystemUsers();
+    int getUserCount();
+
+    // 获取所有管理员用户数量
+    @Select("SELECT COUNT(*) FROM users WHERE role = 'admin'")
+    int getAdminCount();
 }

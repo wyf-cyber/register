@@ -39,9 +39,9 @@ public class EmailMsg {
                             "<p style='font-size: 16px; color: #333333;'>感谢您使用我们的线上挂号服务平台！为了保护您的账户安全，请使用以下验证码进行验证：</p>" +
                             "<p style='font-size: 20px; font-weight: bold; color: #FF5722; text-align: center;'>验证码：<span style='font-size: 24px; color: #2196F3;'>" + code + "</span></p>" +
                             "<p style='font-size: 16px; color: #333333;'>该验证码有效期为10分钟，请尽快使用。</p>" +
-                            "<p style='font-size: 16px; color: #333333;'>如果您没有进行注册操作，请忽略此邮件。</p>" +
+                            "<p style='font-size: 16px; color: #333333;'>如果您没有进行登录操作，请忽略此邮件。</p>" +
                             "<hr style='border: 0; border-top: 1px solid #ccc;' />" +
-                            "<p style='font-size: 14px; color: #888888; text-align: center;'>XXX 预约挂号系统 &copy; 2024</p>" +
+                            "<p style='font-size: 14px; color: #888888; text-align: center;'>XXX 预约挂号系统 &copy; 2025</p>" +
                             "</div>" +
                             "</body>" +
                             "</html>",
