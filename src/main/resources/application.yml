@@ -29,6 +29,18 @@ spring:
       host: localhost
       port: 6379
       timeout: 5000  # 可选项，连接超时时间，默认5000ms
+  # 添加MVC编码配置
+  mvc:
+    servlet:
+      load-on-startup: 1
+
+# 添加服务器编码配置
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
@@ -37,4 +49,5 @@ mybatis:
 webapi:
   app_id: flrtqfkluhmrycgx
   app_secret: ijaPntiZq5oC6m3QrXEKtWCc96an5iW0
+  gemini_api_key: AIzaSyCTX0FL2MP7VhztyiuIO0N5UdDZo-9ALsI
 

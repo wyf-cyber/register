@@ -12,4 +12,5 @@ import org.springframework.stereotype.Component;
 public class WebApiConfig {
     private String appId;
     private String appSecret;
+    private String geminiApiKey;
 }

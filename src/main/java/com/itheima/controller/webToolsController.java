@@ -25,4 +25,9 @@ public class WebToolsController {
     public String generateQRCode(@RequestParam String username) {
         return webToolsService.getQRCode(username);
     }
+
+    @GetMapping("/getAIResponse")
+    public String getAIResponse(@RequestParam String message) {
+        return webToolsService.getAIResponse(message);
+    }
 }
