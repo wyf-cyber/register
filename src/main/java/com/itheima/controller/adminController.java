@@ -72,4 +72,10 @@ public class AdminController {
     public ResponseEntity<?> countSystemAppointments(@RequestParam String day) {
         return adminService.countSystemAppointmentsService(day);
     }
+
+    // 获取指定时间段内最热门的医生列表
+    @GetMapping("/getTopDoctors")
+    public ResponseEntity<?> getTopDoctors(@RequestParam String startDate, @RequestParam String endDate) {
+        return adminService.getTopDoctorsService(startDate, endDate);
+    }
 }

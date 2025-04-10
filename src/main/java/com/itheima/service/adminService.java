@@ -33,7 +33,7 @@ public class AdminService {
 
     // 添加一个医生的信息
     public ResponseEntity<?> addDoctorService(String department, String doctor, String detail, String day) {
-        doctorMapper.addDoctor(department, doctor, detail, day);
+        doctorMapper.addDoctor(department, doctor, detail, 0, day);
         return ResponseEntity.ok("Doctor added successfully");
     }
 
@@ -59,10 +59,12 @@ public class AdminService {
     // 当前系统的预约数量，返回一个整型列表，列表中包含接下来7天的预约数量
     public ResponseEntity<?> countSystemAppointmentsService(String day) {
         List<Integer> counts = new ArrayList<>();
+        LocalDate startDate = LocalDate.parse(day);
+        
         for (int i = 0; i < 7; i++) {
-            LocalDate date = LocalDate.parse(day).plusDays(i);
-            day = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            counts.add(registerMapper.countSystemAppointments(day));
+            LocalDate currentDate = startDate.plusDays(i);
+            String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            counts.add(registerMapper.countSystemAppointments(formattedDate));
         }
         return ResponseEntity.ok(counts);
     }
@@ -89,6 +91,12 @@ public class AdminService {
     public ResponseEntity<?> getAppointmentTrendService(String startDate, String endDate) {
         List<Map<String, Object>> trend = registerMapper.getAppointmentTrend(startDate, endDate);
         return ResponseEntity.ok(trend);
+    }
+
+    // 获取指定时间段内最热门的5位医生的名称和预约数量列表
+    public ResponseEntity<?> getTopDoctorsService(String startDate, String endDate) {
+        List<Map<String, Object>> topDoctors = registerMapper.getTopDoctors(startDate, endDate);
+        return ResponseEntity.ok(topDoctors);
     }
 }
 

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -13,8 +14,12 @@ import java.util.Map;
 @Mapper
 public interface DoctorMapper {
     // 添加一个医生的信息
-    @Insert("INSERT INTO doctors (department, doctor, detail, state) VALUES (#{department}, #{doctor}, #{detail}, #{state})")
-    void addDoctor(String department, String doctor, String detail, String day);
+    @Insert("INSERT INTO doctors (department, doctor, detail, state, work_date) VALUES (#{department}, #{doctor}, #{detail}, 0, #{day})")
+    void addDoctor(@Param("department") String department, 
+                   @Param("doctor") String doctor, 
+                   @Param("detail") String detail, 
+                   @Param("state") int state,
+                   @Param("day") String day);
 
     // 删除一个医生的信息
     @Delete("DELETE FROM doctors WHERE department = #{department} AND doctor = #{doctor} AND work_date = #{day}")
@@ -50,7 +55,7 @@ public interface DoctorMapper {
 
     // 更新医生信息
     @Update("UPDATE doctors SET department = #{newDepartment}, doctor = #{newDoctor}, " +
-            "detail = #{newDetail} WHERE department = #{department} AND doctor = #{doctor} " +
+            "detail = #{newDetail}, work_date = #{day} WHERE department = #{department} AND doctor = #{doctor} " +
             "AND work_date = #{day}")
     void updateDoctor(String department, String doctor, String newDepartment, 
                      String newDoctor, String newDetail, String day);

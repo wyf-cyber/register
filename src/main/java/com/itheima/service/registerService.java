@@ -7,6 +7,8 @@ import com.itheima.pojo.DoctorInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -33,7 +35,9 @@ public class RegisterService {
         // 为了确定挂号的优先级，使用先到先得的原则，即先预约的在前面
         // 将今天已经过去多少秒赋值给time这个整型
         int time = (int) (System.currentTimeMillis() / 1000);
-        registerMapper.insertAppointment(department, doctor, username, day, time);
+        // 将今天日期使用字符串格式 YYYY-MM-DD 进行存储
+        String register_day = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        registerMapper.insertAppointment(department, doctor, username, day, register_day, time);
         return "预约信息已成功添加";
     }
 
