@@ -1,5 +1,7 @@
 package com.itheima.service;
 
+import com.itheima.pojo.doctorSchedule;
+
 import com.itheima.mapper.DoctorMapper;
 import com.itheima.mapper.RegisterMapper;
 import com.itheima.mapper.UserMapper;
@@ -38,9 +40,9 @@ public class AdminService {
     }
 
     // 修改指定医生的信息
-    public ResponseEntity<?> updateDoctorService(String department, String doctor, String newDepartment, 
-                                               String newDoctor, String newDetail, String day) {
-        doctorMapper.updateDoctor(department, doctor, newDepartment, newDoctor, newDetail, day);
+    public ResponseEntity<?> updateDoctorService(String department, String doctor, String day, String newDepartment, 
+                                               String newDoctor, String newDetail, String newDay) {
+        doctorMapper.updateDoctor(department, doctor, day, newDepartment, newDoctor, newDetail, newDay);
         return ResponseEntity.ok("Doctor information updated successfully");
     }
 
@@ -71,7 +73,7 @@ public class AdminService {
 
     // 获取指定科室的所有医生列表
     public ResponseEntity<?> getDoctorsByDepartmentService(String department) {
-        List<Map<String, Object>> doctors = doctorMapper.getDoctorsByDepartment(department);
+        List<doctorSchedule> doctors = doctorMapper.getDoctorsByDepartment(department);
         return ResponseEntity.ok(doctors);
     }
 

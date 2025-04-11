@@ -1,6 +1,7 @@
 package com.itheima.mapper;
 
 import com.itheima.pojo.DoctorInfo;
+import com.itheima.pojo.doctorSchedule;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
@@ -55,14 +56,13 @@ public interface DoctorMapper {
 
     // 更新医生信息
     @Update("UPDATE doctors SET department = #{newDepartment}, doctor = #{newDoctor}, " +
-            "detail = #{newDetail}, work_date = #{day} WHERE department = #{department} AND doctor = #{doctor} " +
+            "detail = #{newDetail}, work_date = #{newDay} WHERE department = #{department} AND doctor = #{doctor} " +
             "AND work_date = #{day}")
-    void updateDoctor(String department, String doctor, String newDepartment, 
-                     String newDoctor, String newDetail, String day);
+    void updateDoctor(String department, String doctor, String day, String newDepartment, String newDoctor, String newDetail, String newDay);
 
     // 获取指定科室的所有医生
-    @Select("SELECT DISTINCT doctor, detail FROM doctors WHERE department = #{department}")
-    List<Map<String, Object>> getDoctorsByDepartment(String department);
+    @Select("SELECT DISTINCT department, doctor, detail, state, work_date FROM doctors WHERE department = #{department}")
+    List<doctorSchedule> getDoctorsByDepartment(String department);
 
     // 获取指定日期的医生排班情况
     @Select("SELECT department, doctor, detail, state, work_date FROM doctors " +

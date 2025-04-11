@@ -27,8 +27,8 @@ public class AdminController {
 
     // 修改一个医生的信息
     @GetMapping("/updateDoctor")
-    public ResponseEntity<?> updateDoctor(@RequestParam String department, @RequestParam String doctor, @RequestParam String newDepartment, @RequestParam String newDoctor, @RequestParam String newDetail, @RequestParam String day) {
-        return adminService.updateDoctorService(department, doctor, newDepartment, newDoctor, newDetail, day);
+    public ResponseEntity<?> updateDoctor(@RequestParam String department, @RequestParam String doctor, @RequestParam String day, @RequestParam String newDepartment, @RequestParam String newDoctor, @RequestParam String newDetail, @RequestParam String newDay) {
+        return adminService.updateDoctorService(department, doctor, day, newDepartment, newDoctor, newDetail, newDay);
     }
 
     // 删除一个医生的信息
