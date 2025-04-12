@@ -2,25 +2,25 @@
   "groups": [
     {
       "name": "webapi",
-      "type": "com.itheima.config.WebApiConfig",
-      "sourceType": "com.itheima.config.WebApiConfig"
+      "type": "com.itheima.config.WebAPIConfig",
+      "sourceType": "com.itheima.config.WebAPIConfig"
     }
   ],
   "properties": [
     {
       "name": "webapi.app-id",
       "type": "java.lang.String",
-      "sourceType": "com.itheima.config.WebApiConfig"
+      "sourceType": "com.itheima.config.WebAPIConfig"
     },
     {
       "name": "webapi.app-secret",
       "type": "java.lang.String",
-      "sourceType": "com.itheima.config.WebApiConfig"
+      "sourceType": "com.itheima.config.WebAPIConfig"
     },
     {
       "name": "webapi.gemini-api-key",
       "type": "java.lang.String",
-      "sourceType": "com.itheima.config.WebApiConfig"
+      "sourceType": "com.itheima.config.WebAPIConfig"
     }
   ],
   "hints": []

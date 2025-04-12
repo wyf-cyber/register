@@ -1,6 +1,6 @@
 package com.itheima.service;
 
-import com.itheima.config.WebApiConfig;
+import com.itheima.config.WebAPIConfig;
 import com.itheima.pojo.VerifyCodeAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -31,7 +31,7 @@ public class WebToolsService {
     private static final Logger logger = LoggerFactory.getLogger(WebToolsService.class);
 
     @Autowired
-    private WebApiConfig webApiConfig;
+    private WebAPIConfig webApiConfig;
 
     @Autowired
     private RestTemplate restTemplate;

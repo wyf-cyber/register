@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Component
 @ConfigurationProperties(prefix = "webapi")     // 从配置文件中读取api的id和密钥
-public class WebApiConfig {
+public class WebAPIConfig {
     private String appId;
     private String appSecret;
     private String geminiApiKey;
