@@ -1,6 +1,6 @@
 package com.itheima.controller;
 
-import com.itheima.service.AdminService;
+import com.itheima.service.adminService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping("/admin")
 @CrossOrigin
-public class AdminController {
+public class adminController {
     @Autowired
-    private AdminService adminService;
+    private adminService adminService;
 
     // 获取普通用户的数量
     @GetMapping("/getUserCount")

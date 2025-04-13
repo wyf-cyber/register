@@ -10,10 +10,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin // Support cross-origin requests
-public class AuthController {
+public class authController {
 
     @Autowired
-    private com.itheima.service.AuthService authService;
+    private com.itheima.service.authService authService;
 
     // 注册逻辑
     @GetMapping("/register")

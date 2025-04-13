@@ -10,10 +10,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/register")
 @CrossOrigin // Support cross-origin requests
-public class RegisterController {
+public class registerController {
 
     @Autowired
-    private com.itheima.service.RegisterService registerService;
+    private com.itheima.service.registerService registerService;
 
 
     @GetMapping("/addApp")

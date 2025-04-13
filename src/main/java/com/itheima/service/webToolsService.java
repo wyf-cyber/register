@@ -1,7 +1,7 @@
 package com.itheima.service;
 
 import com.itheima.config.WebAPIConfig;
-import com.itheima.pojo.VerifyCodeAPI;
+import com.itheima.pojo.verifyCodeAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -26,9 +26,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Service
-public class WebToolsService {
+public class webToolsService {
 
-    private static final Logger logger = LoggerFactory.getLogger(WebToolsService.class);
+    private static final Logger logger = LoggerFactory.getLogger(webToolsService.class);
 
     @Autowired
     private WebAPIConfig webApiConfig;
@@ -63,7 +63,7 @@ public class WebToolsService {
                     String verifyCode = (String) data.get("verifyCode");
                     String verifyCodeImgUrl = (String) data.get("verifyCodeImgUrl");
 
-                    VerifyCodeAPI captchaResponse = new VerifyCodeAPI();
+                    verifyCodeAPI captchaResponse = new verifyCodeAPI();
                     captchaResponse.setVerifyCode(verifyCode);
                     captchaResponse.setVerifyCodeImgUrl(verifyCodeImgUrl);
 

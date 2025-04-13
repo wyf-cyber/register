@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class RegisterService {
+public class registerService {
 
     @Autowired
     private RegisterMapper registerMapper;

@@ -1,6 +1,6 @@
 package com.itheima.controller;
 
-import com.itheima.service.WebToolsService;
+import com.itheima.service.webToolsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/tools")
-public class WebToolsController {
+public class webToolsController {
 
     @Autowired
-    private WebToolsService webToolsService;
+    private webToolsService webToolsService;
 
     @GetMapping("/Captcha")
     public ResponseEntity<?> generateCaptcha() {

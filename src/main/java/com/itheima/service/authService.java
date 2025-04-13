@@ -16,7 +16,7 @@ import java.util.Random;
 import java.util.List;
 
 @Service
-public class AuthService {
+public class authService {
 
     @Autowired
     private UserMapper userMapper;

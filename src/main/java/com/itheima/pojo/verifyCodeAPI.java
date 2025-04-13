@@ -6,7 +6,7 @@ import lombok.Setter;
 @Setter
 @Getter
 // 封装验证码应答消息
-public class VerifyCodeAPI {
+public class verifyCodeAPI {
     private String verifyCode;
     private String verifyCodeImgUrl;
 }
