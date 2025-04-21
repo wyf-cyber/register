@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
-    password: 271828
+    password: 721926
   mail:
     # 发送者邮箱
     username: 17326280236@163.com

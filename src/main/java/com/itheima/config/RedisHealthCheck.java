@@ -41,7 +41,7 @@ public class RedisHealthCheck {
             }
 
             // 获取Redis安装路径("D:\Redis\Redis-x64-5.0.14.1\redis-server.exe")
-            String redisPath = "D:\\Redis\\Redis-x64-5.0.14.1\\redis-server.exe";
+            String redisPath = "D:\\software\\Redis-x64-3.2.100\\redis-server.exe";
             
             // 启动Redis服务器
             ProcessBuilder processBuilder = new ProcessBuilder(redisPath);

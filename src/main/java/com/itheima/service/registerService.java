@@ -1,8 +1,10 @@
 package com.itheima.service;
 
+import com.itheima.mapper.CommentMapper;
 import com.itheima.mapper.RegisterMapper;
 import com.itheima.mapper.DoctorMapper;
 import com.itheima.pojo.Appointment;
+import com.itheima.pojo.Comment;
 import com.itheima.pojo.DoctorInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,9 @@ public class registerService {
     private RegisterMapper registerMapper;
     @Autowired
     private DoctorMapper doctorMapper;
+
+    @Autowired
+    private CommentMapper commentMapper;
 
     // 判断本人是否已经预约该医生
     private boolean inAppointment(String department, String doctor, String username) {
@@ -99,4 +104,17 @@ public class registerService {
         }
         return ans; // Filter data from database
     }
+    public String addCommentService(String doctor,String content, int rating) {
+        commentMapper.addComment(doctor, content, rating);
+        return "评论已成功添加";
+    }
+
+    public List<Comment> getAllCommentsService() {
+        return commentMapper.getAllComments();
+    }
+
+    public List<Comment> getCommentsByDoctorService(String doctor) {
+        return commentMapper.getCommentsByDoctor(doctor);
+    }
+
 }
