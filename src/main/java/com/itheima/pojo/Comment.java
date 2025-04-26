@@ -1,6 +1,5 @@
 package com.itheima.pojo;
 
-import java.time.LocalDate;
 import lombok.*;
 
 @Setter
