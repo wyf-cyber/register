@@ -40,8 +40,8 @@ public interface RegisterMapper {
     void deleteAppointments(String username);
 
     // 获取指定用户的指定科室、医生、日期的预约
-    @Select("SELECT * FROM appointment WHERE username = #{username} AND department = #{department} AND doctor = #{doctor}")
-    List<Appointment> searchMyAppointments(String department, String doctor, String username);
+    @Select("SELECT * FROM appointment WHERE username = #{username} AND department = #{department} AND doctor = #{doctor} AND day = #{day}")
+    List<Appointment> searchMyAppointments(String department, String doctor, String username, String day);
 
     // 更新指定用户的预约
     @Update("UPDATE appointment SET username = #{new_username} WHERE username = #{username}")

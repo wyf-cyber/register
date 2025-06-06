@@ -27,13 +27,17 @@ public class registerService {
     private CommentMapper commentMapper;
 
     // 判断本人是否已经预约该医生
-    private boolean inAppointment(String department, String doctor, String username) {
-        List<Appointment> appointments = registerMapper.searchMyAppointments(department, doctor, username);
+    private boolean inAppointment(String department, String doctor, String username, String day) {
+        List<Appointment> appointments = registerMapper.searchMyAppointments(department, doctor, username, day);
         return !appointments.isEmpty();
     }
 
     // 添加预约
     public String addAppointmentService(String department, String doctor, String username, String day) {
+        // Add check for existing appointment
+        if (inAppointment(department, doctor, username, day)) {
+            return "您已经预约过该医生，请勿重复预约";
+        }
         // 先刷新医生记录
         doctorMapper.addState(department, doctor, day);
         // 添加预约关系
@@ -83,7 +87,7 @@ public class registerService {
 
         for (DoctorInfo d : tmp) {
             // flag 表示是否已经预约，state 表示医生状态
-            boolean flag = inAppointment(d.getDepartment(), d.getDoctor(), username);
+            boolean flag = inAppointment(d.getDepartment(), d.getDoctor(), username, day);
             ans.add(new DoctorInfo(d.getDepartment(), d.getDoctor(), d.getDetail(), d.getState(), flag));
         }
         return ans; // Fetch data from database
@@ -91,15 +95,15 @@ public class registerService {
 
     public List<DoctorInfo> searchDoctorsService(String department, String state, String username, String day) {
         List<DoctorInfo> tmp;
-        if (Objects.equals(state, "全部")){
-            tmp = doctorMapper.searchAll(department, day);
-        } else {
+        if (Objects.equals(state, "0")){
             tmp = doctorMapper.searchFree(department, day);
+        } else {
+            tmp = doctorMapper.searchAll(department, day);
         }
         List<DoctorInfo> ans = new ArrayList<>();
         for (DoctorInfo d : tmp) {
             // flag 表示是否已经预约，state 表示医生状态
-            boolean flag = inAppointment(d.getDepartment(), d.getDoctor(), username);
+            boolean flag = inAppointment(d.getDepartment(), d.getDoctor(), username, day);
             ans.add(new DoctorInfo(d.getDepartment(), d.getDoctor(), d.getDetail(), d.getState(), flag));
         }
         return ans; // Filter data from database
